@@ -1541,8 +1541,10 @@ class StandardCollection(Collection):
             if not resp.is_success:
                 raise DocumentInsertError(resp, request)
             return True if silent else resp.body
-
-        return self._execute(request, response_handler)
+        response = self._execute(request, response_handler)
+        if return_new == True:
+            response = response["new"]
+        return
 
     def insert_many(self,
                     documents,
