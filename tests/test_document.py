@@ -74,13 +74,11 @@ def test_document_insert(col, docs):
     # Test insert with return_new set to True
     doc = docs[2]
     result = col.insert(doc, return_new=True)
-    assert result['_id'] == '{}/{}'.format(col.name, doc['_key'])
-    assert result['_key'] == doc['_key']
     assert isinstance(result['_rev'], string_types)
-    assert result['new']['_id'] == result['_id']
-    assert result['new']['_key'] == result['_key']
-    assert result['new']['_rev'] == result['_rev']
-    assert result['new']['val'] == doc['val']
+    assert ['_id'] == '{}/{}'.format(col.name, doc['_key'])
+    assert ['_key'] == doc['_key']
+    assert ['_rev'] == result['_rev']
+    assert ['val'] == doc['val']
     assert col[doc['_key']]['_key'] == doc['_key']
     assert col[doc['_key']]['val'] == doc['val']
 
